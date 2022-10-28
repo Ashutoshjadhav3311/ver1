@@ -5,7 +5,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const webSocket = useRef(null);
   const [socketOpen, setSocketOpen] = useState(false);
   const [socketMessages, setSocketMessages] = useState([]);
-  //const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   useEffect(() => {
     // add the websocket url to env in production environment
