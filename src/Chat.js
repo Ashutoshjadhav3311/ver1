@@ -3,9 +3,9 @@ import { Header, Loader } from "semantic-ui-react";
 
 const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const webSocket = useRef(null);
-  const [socketOpen, setSocketOpen] = useState(false);
-  const [socketMessages, setSocketMessages] = useState([]);
-  const [alert, setAlert] = useState(null);
+  //const [socketOpen, setSocketOpen] = useState(false);
+  //const [socketMessages, setSocketMessages] = useState([]);
+  //const [alert, setAlert] = useState(null);
 
   useEffect(() => {
     // add the websocket url to env in production environment
@@ -22,7 +22,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   return (
     <div className="App">
       {alert}
-      <Header as="h2">Simple WebRTC Chap App</Header>
+      <Header as="h2">SMessage Chap </Header>
       {(socketOpen && <Fragment></Fragment>) || (
         <Loader size="massive" active inline="centered">
           Loading
