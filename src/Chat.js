@@ -11,7 +11,7 @@ import {
 import SweetAlert from "react-bootstrap-sweetalert";
 import { format } from "date-fns";
 import "./App.css";
-import UsersList from "./UsersList";
+import UsersList from "./UserList";
 import MessageBox from "./MessageBox";
 // Use for remote connections
 const configuration = {
