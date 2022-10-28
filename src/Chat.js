@@ -22,10 +22,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   return (
     <div className="App">
       {alert}
-      <Header as="h2" icon>
-        <Icon name="users" />
-        Simple WebRTC Chap App
-      </Header>
+      <Header as="h2">Simple WebRTC Chap App</Header>
       {(socketOpen && <Fragment></Fragment>) || (
         <Loader size="massive" active inline="centered">
           Loading
