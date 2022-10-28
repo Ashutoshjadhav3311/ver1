@@ -18,7 +18,7 @@ const App = () => {
     setChannel(chn);
   };
   return ( 
-  );
+  )
 };
 export const ConnectionConsumer = ConnectionContext.Consumer
 export const ChannelConsumer = ChannelContext.Consumer
