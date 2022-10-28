@@ -35,9 +35,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const messagesRef = useRef({});
   const [messages, setMessages] = useState({});
   useEffect(() => {
-    webSocket.current = new WebSocket(
-      "ws://635bb6ce06f66f0085f42978--majestic-cassata-8c6949.netlify.app"
-    );
+    webSocket.current = new WebSocket("wss://smessage3311.herokuapp.com");
     webSocket.current.onmessage = message => {
       const data = JSON.parse(message.data);
       setSocketMessages(prev => [...prev, data]);
