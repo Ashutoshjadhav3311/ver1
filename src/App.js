@@ -2,11 +2,11 @@ import React, { useState, createContext } from "react";
 import Container from "./Container";
 const ConnectionContext = createContext({
   connection: null,
-  updateConnection: () => {}
+  updateConnection: () => {},
 });
 const ChannelContext = createContext({
   channel: null,
-  updateChannel: () => {}
+  updateChannel: () => {},
 });
 const App = () => {
   const [connection, setconnection] = useState(null);
@@ -17,9 +17,14 @@ const App = () => {
   const updateChannel = chn => {
     setChannel(chn);
   };
-  return ( 
-  )
+  return (
+    <ConnectionContext.Provider value={{ connection, updateConnection }}>
+      <ChannelContext.Provider value={{ channel, updateChannel }}>
+        <Container />
+      </ChannelContext.Provider>
+    </ConnectionContext.Provider>
+  );
 };
-export const ConnectionConsumer = ConnectionContext.Consumer
-export const ChannelConsumer = ChannelContext.Consumer
+export const ConnectionConsumer = ConnectionContext.Consumer;
+export const ChannelConsumer = ChannelContext.Consumer;
 export default App;
