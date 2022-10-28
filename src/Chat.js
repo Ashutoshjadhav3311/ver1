@@ -3,8 +3,8 @@ import { Header, Loader } from "semantic-ui-react";
 
 const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const webSocket = useRef(null);
-  //const [socketOpen, setSocketOpen] = useState(false);
-  //const [socketMessages, setSocketMessages] = useState([]);
+  const [socketOpen, setSocketOpen] = useState(false);
+  const [socketMessages, setSocketMessages] = useState([]);
   //const [alert, setAlert] = useState(null);
 
   useEffect(() => {
