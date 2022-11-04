@@ -7,18 +7,17 @@ import {
   Segment,
   Button,
   Loader,
+  GridRow,
 } from "semantic-ui-react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { format } from "date-fns";
 import "./App.css";
 import UsersList from "./UserList";
 import MessageBox from "./MessageBox";
-// Use for remote connections
+
 const configuration = {
   iceServers: [{ url: "stun:stun.1.google.com:19302" }],
 };
-// Use for local connections
-// const configuration = null;
 const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const [socketOpen, setSocketOpen] = useState(false);
   const [socketMessages, setSocketMessages] = useState([]);
@@ -35,7 +34,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const messagesRef = useRef({});
   const [messages, setMessages] = useState({});
   useEffect(() => {
-    webSocket.current = new WebSocket("wss://smessage3311.herokuapp.com");
+    webSocket.current = new WebSocket("wss://smessage3311.herokuapp.com"); //for cloud server ://smessage3311.herokuapp.com"
     webSocket.current.onmessage = message => {
       const data = JSON.parse(message.data);
       setSocketMessages(prev => [...prev, data]);
@@ -160,7 +159,6 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
       );
     }
   };
-  //when somebody wants to message us
   const onOffer = ({ offer, name }) => {
     setConnectedTo(name);
     connectedRef.current = name;
@@ -186,15 +184,12 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
         );
       });
   };
-  //when another user answers to our offer
   const onAnswer = ({ answer }) => {
     connection.setRemoteDescription(new RTCSessionDescription(answer));
   };
-  //when we got ice candidate from another user
   const onCandidate = ({ candidate }) => {
     connection.addIceCandidate(new RTCIceCandidate(candidate));
   };
-  //when a user clicks the send message button
   const sendMsg = () => {
     const time = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
     let text = { time, message, name };
@@ -270,56 +265,68 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   return (
     <div className="App">
       {alert}
-      <Header as="h2" icon>
-        <Icon name="users" />
-        SMessage
-      </Header>
+      <div className="dchat">
+        <Header as="h2" icon>
+          <Icon name="comments " />
+          Decentralized Chat
+        </Header>
+      </div>
       {(socketOpen && (
         <Fragment>
-          <Grid centered columns={4}>
-            <Grid.Column>
-              {(!isLoggedIn && (
-                <Input
-                  fluid
-                  disabled={loggingIn}
-                  type="text"
-                  onChange={e => setName(e.target.value)}
-                  placeholder="Username..."
-                  action
-                >
-                  <input />
-                  <Button
-                    color="teal"
-                    disabled={!name || loggingIn}
-                    onClick={handleLogin}
+          <body>
+            <div class="wrapper">
+              <div class="one">
+                {(!isLoggedIn && (
+                  <Input
+                    fluid
+                    disabled={loggingIn}
+                    type="text"
+                    onChange={e => setName(e.target.value)}
+                    placeholder="Username"
+                    action
                   >
-                    <Icon name="sign-in" />
-                    Login
-                  </Button>
-                </Input>
-              )) || (
-                <Segment raised textAlign="center" color="olive">
-                  Logged In as: {name}
-                </Segment>
-              )}
-            </Grid.Column>
-          </Grid>
-          <Grid>
-            <UsersList
-              users={users}
-              toggleConnection={toggleConnection}
-              connectedTo={connectedTo}
-              connection={connecting}
-            />
-            <MessageBox
-              messages={messages}
-              connectedTo={connectedTo}
-              message={message}
-              setMessage={setMessage}
-              sendMsg={sendMsg}
-              name={name}
-            />
-          </Grid>
+                    <input />
+                    <Button
+                      inverted
+                      animated
+                      color="blue"
+                      disabled={!name || loggingIn}
+                      onClick={handleLogin}
+                    >
+                      <div class="visible content">
+                        <h5>Login</h5>
+                      </div>
+                      <div class="hidden content">
+                        <i class="right arrow icon"></i>
+                      </div>
+                    </Button>
+                  </Input>
+                )) || (
+                  <Segment raised textAlign="center" color="blue">
+                    Logged In as: {name}
+                  </Segment>
+                )}{" "}
+              </div>
+              <div class="three">
+                <UsersList
+                  users={users}
+                  toggleConnection={toggleConnection}
+                  connectedTo={connectedTo}
+                  connection={connecting}
+                />
+              </div>
+              <div class="two">
+                <MessageBox
+                  messages={messages}
+                  connectedTo={connectedTo}
+                  message={message}
+                  setMessage={setMessage}
+                  sendMsg={sendMsg}
+                  name={name}
+                />
+              </div>
+            </div>
+          </body>
         </Fragment>
       )) || (
         <Loader size="massive" active inline="centered">

@@ -29,7 +29,7 @@ const MessageBox = ({
               !!connectedTo ? connectedTo : "Not chatting with anyone currently"
             }
           />
-          <Card.Content>
+          <Card.Content class="messagecontent">
             {!!connectedTo && messages[connectedTo] ? (
               <Comment.Group>
                 {messages[connectedTo].map(
@@ -54,8 +54,8 @@ const MessageBox = ({
             ) : (
               <Segment placeholder>
                 <Header icon>
-                  <Icon name="discussions" />
-                  No messages available yet
+                  <Icon name="envelope open outline" />
+                  No messages
                 </Header>
               </Segment>
             )}
@@ -68,9 +68,19 @@ const MessageBox = ({
               action
             >
               <input />
-              <Button color="teal" disabled={!message} onClick={sendMsg}>
-                <Icon name="send" />
-                Send Message
+              <Button
+                inverted
+                animated
+                color="blue"
+                disabled={!message}
+                onClick={sendMsg}
+              >
+                <div class="visible content">
+                  <h5>Send</h5>
+                </div>
+                <div class="hidden content">
+                  <i class="chevron circle right icon"></i>
+                </div>
               </Button>
             </Input>
           </Card.Content>
