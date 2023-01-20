@@ -34,7 +34,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const messagesRef = useRef({});
   const [messages, setMessages] = useState({});
   useEffect(() => {
-    webSocket.current = new WebSocket("wss://smessage3311.herokuapp.com"); //for cloud server ://smessage3311.herokuapp.com"
+    webSocket.current = new WebSocket("wss://server-qh5h.onrender.com/"); //for cloud server ://smessage3311.herokuapp.com"
     webSocket.current.onmessage = message => {
       const data = JSON.parse(message.data);
       setSocketMessages(prev => [...prev, data]);
